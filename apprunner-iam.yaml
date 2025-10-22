@@ -17,10 +17,10 @@ run:
         - name: AWS_REGION
           value: "us-east-1"
         - name: STRANDS_MODEL_PROVIDER
-          value: "bedrock" 
+          value: "bedrock"
         - name: STRANDS_MODEL_ID
           value: "anthropic.claude-sonnet-4-5-20250929-v1:0"
         # Set these in App Runner Console Environment Variables:
         # AWS_ACCESS_KEY_ID (if not using IAM role)
-        # AWS_SECRET_ACCESS_KEY (if not using IAM role) 
+        # AWS_SECRET_ACCESS_KEY (if not using IAM role)
         # COLLEGE_SCORECARD_API_KEY

@@ -19,12 +19,12 @@ run:
         - name: AWS_REGION
           value: "us-east-1"
         - name: AWS_ACCESS_KEY_ID
-          value: ""  # Set in App Runner Console
+          value: "" # Set in App Runner Console
         - name: AWS_SECRET_ACCESS_KEY
-          value: ""  # Set in App Runner Console
+          value: "" # Set in App Runner Console
         # Application Configuration
         - name: COLLEGE_SCORECARD_API_KEY
-          value: ""  # Set in App Runner Console
+          value: "" # Set in App Runner Console
         - name: STRANDS_MODEL_PROVIDER
           value: "bedrock"
         - name: STRANDS_MODEL_ID
