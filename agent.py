@@ -19,6 +19,7 @@ from tools import (
 
 # --- Strands setup ---
 from strands import Agent
+import boto3
 
 def make_agent():
     # Set AWS environment variables if they're in the .env file
@@ -31,6 +32,11 @@ def make_agent():
         os.environ['AWS_ACCESS_KEY_ID'] = aws_access_key
         os.environ['AWS_SECRET_ACCESS_KEY'] = aws_secret_key
         os.environ['AWS_REGION'] = aws_region
+        # Clear any AWS profile environment variables that might interfere
+        if 'AWS_PROFILE' in os.environ:
+            del os.environ['AWS_PROFILE']
+        if 'AWS_DEFAULT_PROFILE' in os.environ:
+            del os.environ['AWS_DEFAULT_PROFILE']
     
     # Create agent with basic configuration
     # Strands will use AWS credentials from environment automatically

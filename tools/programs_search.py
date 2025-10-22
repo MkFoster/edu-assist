@@ -324,7 +324,8 @@ async def programs_search(args: ProgramsSearchArgs) -> Dict[str, Any]:
             prog_line = f"  • {prog['title']} (CIP: {prog['cip']})"
             if prog['credential']:
                 cred_map = {1: "Certificate", 2: "Associate", 3: "Bachelor's", 4: "Post-bacc Cert", 5: "Master's", 6: "Doctoral"}
-                prog_line += f" - {cred_map.get(prog['credential'], f"Level {prog['credential']}")}"
+                default_cred = f"Level {prog['credential']}"
+                prog_line += f" - {cred_map.get(prog['credential'], default_cred)}"
             if prog['earnings_high_q']:
                 prog_line += f" - Top 25% Earnings: ${prog['earnings_high_q']:,}"
             summary_lines.append(prog_line)
