@@ -20,17 +20,10 @@ run:
           value: "bedrock"
         - name: STRANDS_MODEL_ID
           value: "anthropic.claude-sonnet-4-5-20250929-v1:0"
-        # AWS Credentials from Secrets Manager
+    secrets:
         - name: AWS_ACCESS_KEY_ID
-          value_from:
-              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
-              secret_key: "AWS_ACCESS_KEY_ID"
+          value-from: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW:AWS_ACCESS_KEY_ID::"
         - name: AWS_SECRET_ACCESS_KEY
-          value_from:
-              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
-              secret_key: "AWS_SECRET_ACCESS_KEY"
-        # College Scorecard API Key from Secrets Manager
+          value-from: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW:AWS_SECRET_ACCESS_KEY::"
         - name: COLLEGE_SCORECARD_API_KEY
-          value_from:
-              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
-              secret_key: "COLLEGE_SCORECARD_API_KEY"
+          value-from: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW:COLLEGE_SCORECARD_API_KEY::"
