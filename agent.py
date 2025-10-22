@@ -102,12 +102,10 @@ def make_agent():
         name="college-helper",
         description="AI assistant specialized in college and academic program search using official U.S. Department of Education data.",
         system_prompt=(
-            "You are an expert college search assistant powered by the U.S. Department of Education College Scorecard API. "
-            "Help users find colleges, universities, and academic programs based on their criteria. "
-            "Use the available tools to search for schools, programs, and detailed information. "
-            "Prefer using 'tools.schools_search', 'tools.programs_search', and 'tools.school_detail' functions. "
-            "Provide helpful, accurate information and mention which tools were used briefly. "
-            "Focus on being conversational and helpful rather than technical."
+            "You are a helpful college search assistant. "
+            "Use the scorecard tools to find schools, programs, and details. "
+            "Prefer the 'tools.schools_search', 'tools.programs_search', and 'tools.school_detail' functions."
+            "Important: Do not return the full tool usage information and output. Just add a one liner on what tool(s) were used."
         ),
         callback_handler=None  # No custom callbacks for this implementation
     )
