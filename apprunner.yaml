@@ -14,18 +14,23 @@ run:
     env:
         - name: PORT
           value: "8000"
-        # AWS Configuration - Set these in App Runner Console
-        # Don't put actual values here for security
         - name: AWS_REGION
           value: "us-east-1"
-        - name: AWS_ACCESS_KEY_ID
-          value: "" # Set in App Runner Console
-        - name: AWS_SECRET_ACCESS_KEY
-          value: "" # Set in App Runner Console
-        # Application Configuration
-        - name: COLLEGE_SCORECARD_API_KEY
-          value: "" # Set in App Runner Console
         - name: STRANDS_MODEL_PROVIDER
           value: "bedrock"
         - name: STRANDS_MODEL_ID
           value: "anthropic.claude-sonnet-4-5-20250929-v1:0"
+        # AWS Credentials from Secrets Manager
+        - name: AWS_ACCESS_KEY_ID
+          value_from:
+              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
+              secret_key: "AWS_ACCESS_KEY_ID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value_from:
+              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
+              secret_key: "AWS_SECRET_ACCESS_KEY"
+        # College Scorecard API Key from Secrets Manager
+        - name: COLLEGE_SCORECARD_API_KEY
+          value_from:
+              secret_arn: "arn:aws:secretsmanager:us-east-1:745851906253:secret:edu-assist-sec-28msDW"
+              secret_key: "COLLEGE_SCORECARD_API_KEY"
