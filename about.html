@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - EDU Assist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: linear-gradient(135deg, #316890 0%, #033360 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #e9ecef;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin: 30px 0 15px 0;
+            border-left: 4px solid #3498db;
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: #34495e;
+            font-size: 1.2em;
+            margin: 20px 0 10px 0;
+        }
+
+        p, li {
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .tech-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .tech-item {
+            background: #f8f9fa;
+            padding: 10px 15px;
+            border-radius: 8px;
+            border-left: 3px solid #3498db;
+            font-weight: 500;
+        }
+
+        .external-links {
+            background: #e8f4fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            border: 1px solid #bee5eb;
+        }
+
+        .external-links a {
+            color: #2980b9;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .external-links a:hover {
+            text-decoration: underline;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: #2980b9;
+        }
+
+        .subtitle {
+            font-style: italic;
+            color: #666;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .inspiration-box {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .challenge-box {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .accomplishment-box {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .author-box {
+            background: #e8f5e8;
+            border: 1px solid #c3e6c3;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        .author-box h2 {
+            border: none;
+            padding: 0;
+            margin-bottom: 15px;
+            color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 About EDU Assist</h1>
+            <p class="subtitle">AI-Powered College Search Assistant</p>
+        </div>
+
+        <div class="author-box">
+            <h2>👋 About the Author</h2>
+            <p>Hi! I'm Mark Foster, a full-stack developer from Rochester, NY. I'm passionate about leveraging new technologies to help people achieve their full potential.</p>
+        </div>
+
+        <div class="inspiration-box">
+            <h2>💡 Inspiration</h2>
+            <p>My kids will be searching for a college in a few years, so I want to provide them with a conversational resource grounded with reliable data. Finding the right college is a crucial decision that can shape a student's future, and having access to trustworthy, comprehensive information in an easy-to-use format is essential.</p>
+        </div>
+
+        <h2>🎯 What EDU Assist Does</h2>
+        <p>EDU Assist provides a conversational interface to help students find the right college for them. It is grounded via tools that wrap the US Department of Education College Scorecard API, ensuring that all information comes from official, reliable sources.</p>
+
+        <h3>Key Features:</h3>
+        <ul>
+            <li><strong>Conversational Search:</strong> Ask questions in natural language about colleges and programs</li>
+            <li><strong>Reliable Data:</strong> All information comes from the official U.S. College Scorecard database</li>
+            <li><strong>Comprehensive Coverage:</strong> Search by location, program type, admission rates, costs, and outcomes</li>
+            <li><strong>Real-time Responses:</strong> Get instant answers with streaming chat interface</li>
+            <li><strong>Educational Focus:</strong> Designed specifically for college search and planning</li>
+        </ul>
+
+        <h2>🛠️ How It's Built</h2>
+        <p>I used Strands Agents to build a Python agent and set of tools that integrate with the Scorecard API, powered by Claude Sonnet via Amazon Bedrock. The system combines modern AI capabilities with trusted educational data sources.</p>
+
+        <h3>Technologies Used:</h3>
+        <div class="tech-list">
+            <div class="tech-item">🤖 Strands Agents</div>
+            <div class="tech-item">🐍 Python</div>
+            <div class="tech-item">🧠 Claude Sonnet (Anthropic)</div>
+            <div class="tech-item">☁️ Amazon Bedrock</div>
+            <div class="tech-item">⚡ FastAPI</div>
+            <div class="tech-item">🌐 HTML/CSS/JavaScript</div>
+            <div class="tech-item">📊 U.S. College Scorecard API</div>
+            <div class="tech-item">🔄 Server-Sent Events (SSE)</div>
+            <div class="tech-item">📡 RESTful APIs</div>
+            <div class="tech-item">🐳 Docker</div>
+            <div class="tech-item">🚀 AWS App Runner</div>
+            <div class="tech-item">🔐 Environment Variables</div>
+        </div>
+
+        <div class="challenge-box">
+            <h2>🚧 Challenges Overcome</h2>
+            <p>Strands kept outputting raw tool JSON data in the response. I built another agent with tools hooked into a different API and it didn't repeat. After reading all the docs and much debugging, I simply told Strands to not output all the Tool JSON in the system prompt and that worked!</p>
+        </div>
+
+        <div class="accomplishment-box">
+            <h2>🏆 Accomplishments</h2>
+            <p>This was my first Strands agent (other than a demo build). It uses tools to leverage an existing API, the College Scorecard, to create a conversational experience that makes complex educational data accessible through natural language.</p>
+        </div>
+
+        <h2>📚 What I Learned</h2>
+        <ul>
+            <li><strong>Amazon Bedrock:</strong> How to use Amazon Bedrock as a model provider for AI applications</li>
+            <li><strong>Strands Agents:</strong> How to build an agent with Strands Agents framework</li>
+            <li><strong>API Integration:</strong> How to ground AI responses using tools that wrap existing APIs</li>
+            <li><strong>Trusted Data Sources:</strong> Working with reliable, government-provided educational datasets</li>
+            <li><strong>Conversational AI:</strong> Creating natural language interfaces for complex data queries</li>
+        </ul>
+
+        <h2>🔮 What's Next</h2>
+        <p>The US Bureau of Labor and Statistics has an API that provides wage data. This would allow users to understand how well a particular career might pay. Although the general LLM does a pretty good job translating a user's description of a degree program to an actual degree program, I might be able to improve results by embedding a full list of degree programs.</p>
+
+        <h3>Future Enhancements:</h3>
+        <ul>
+            <li><strong>Career Outcomes:</strong> Integration with Bureau of Labor Statistics for salary data</li>
+            <li><strong>Program Embeddings:</strong> Enhanced degree program matching through embeddings</li>
+            <li><strong>Personalized Recommendations:</strong> AI-driven college matching based on preferences</li>
+            <li><strong>Financial Planning:</strong> Cost analysis and financial aid guidance</li>
+        </ul>
+
+        <div class="external-links">
+            <h3>🔗 Learn More</h3>
+            <p><strong>Developer:</strong> <a href="https://devpost.com/MkFoster" target="_blank">Visit my Devpost Portfolio →</a></p>
+            <p><strong>Data Source:</strong> <a href="https://collegescorecard.ed.gov/data/api/" target="_blank">U.S. Department of Education College Scorecard API →</a></p>
+            <p><strong>About College Scorecard:</strong> The College Scorecard provides the most reliable and comprehensive data on college costs, graduation rates, employment outcomes, and more to help students and families make informed decisions about higher education.</p>
+        </div>
+
+        <a href="/" class="back-link">← Back to EDU Assist</a>
+    </div>
+</body>
+</html>

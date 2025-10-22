@@ -215,6 +215,99 @@ async def serve_index():
         return HTMLResponse(content=error_html, status_code=500)
 
 
+# Serve the privacy policy page
+@app.get("/privacy-policy.html", response_class=HTMLResponse)
+async def serve_privacy_policy():
+    """Serve the privacy policy page."""
+    try:
+        # Get the directory where this script is located
+        current_dir = Path(__file__).parent
+        html_file_path = current_dir / "privacy-policy.html"
+        
+        # Read the HTML file
+        with open(html_file_path, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+            
+        return HTMLResponse(content=html_content)
+    
+    except FileNotFoundError:
+        # Fallback error page if privacy-policy.html is not found
+        error_html = """
+        <!DOCTYPE html>
+        <html>
+        <head><title>Error</title></head>
+        <body>
+            <h1>Privacy Policy Not Found</h1>
+            <p>The privacy-policy.html file was not found.</p>
+            <a href="/">← Back to EDU Assist</a>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=error_html, status_code=404)
+
+
+# Serve the user agreement page
+@app.get("/user-agreement.html", response_class=HTMLResponse)
+async def serve_user_agreement():
+    """Serve the user agreement page."""
+    try:
+        # Get the directory where this script is located
+        current_dir = Path(__file__).parent
+        html_file_path = current_dir / "user-agreement.html"
+        
+        # Read the HTML file
+        with open(html_file_path, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+            
+        return HTMLResponse(content=html_content)
+    
+    except FileNotFoundError:
+        # Fallback error page if user-agreement.html is not found
+        error_html = """
+        <!DOCTYPE html>
+        <html>
+        <head><title>Error</title></head>
+        <body>
+            <h1>User Agreement Not Found</h1>
+            <p>The user-agreement.html file was not found.</p>
+            <a href="/">← Back to EDU Assist</a>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=error_html, status_code=404)
+
+
+# Serve the about page
+@app.get("/about.html", response_class=HTMLResponse)
+async def serve_about():
+    """Serve the about page."""
+    try:
+        # Get the directory where this script is located
+        current_dir = Path(__file__).parent
+        html_file_path = current_dir / "about.html"
+        
+        # Read the HTML file
+        with open(html_file_path, 'r', encoding='utf-8') as file:
+            html_content = file.read()
+            
+        return HTMLResponse(content=html_content)
+    
+    except FileNotFoundError:
+        # Fallback error page if about.html is not found
+        error_html = """
+        <!DOCTYPE html>
+        <html>
+        <head><title>Error</title></head>
+        <body>
+            <h1>About Page Not Found</h1>
+            <p>The about.html file was not found.</p>
+            <a href="/">← Back to EDU Assist</a>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=error_html, status_code=404)
+
+
 # API documentation endpoint
 @app.get("/docs-info")
 async def api_docs_info():
