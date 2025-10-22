@@ -6,10 +6,16 @@ import os
 from dotenv import load_dotenv
 load_dotenv()
 
-# --- Import tools from subpackage ---
+# --- Import tools manually ---
 # The act of importing registers the @tool-decorated functions with Strands
-# The tools/__init__.py auto-discovers and imports all tool modules
-import tools  # noqa: F401
+# Import all tool modules to register the tools
+from tools import (
+    college_jokes,
+    meta,
+    programs_search,
+    schools_search,
+    school_detail
+)
 
 # --- Strands setup ---
 from strands import Agent
@@ -35,6 +41,7 @@ def make_agent():
             "You are a helpful college search assistant. "
             "Use the scorecard tools to find schools, programs, and details. "
             "Prefer the 'tools.schools_search', 'tools.programs_search', and 'tools.school_detail' functions."
+            "Important: Do not return the full tool usage information and output. Just add a one liner on what tool(s) were used."
         ),
         callback_handler=None
     )

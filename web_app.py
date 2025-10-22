@@ -109,7 +109,7 @@ async def chat_endpoint(request: ChatRequest):
 
 
 # Streaming chat endpoint using Server-Sent Events
-@app.post("/chat/stream")
+@app.post("/chat/stream", response_model=ChatResponse)
 async def stream_chat(request: ChatRequest):
     """
     Streaming chat endpoint using Server-Sent Events (SSE).
@@ -147,8 +147,8 @@ async def stream_chat(request: ChatRequest):
                     print(f"🔧 Using tool: {tool_name}")
 
                 # Show only a snippet of text to keep output clean
-                if "data" in event:
-                    print(f"📟 Text: {event["data"]}")
+                #if "data" in event:
+                #    print(f"📟 Text: {event["data"]}")
 
                 # Handle text chunks
                 if "data" in event and event["data"]:

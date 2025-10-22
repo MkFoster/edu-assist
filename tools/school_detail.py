@@ -96,21 +96,6 @@ async def school_detail(args: SchoolDetailArgs) -> Dict[str, Any]:
           "ids": [194091, 194824],
           "profiles": ["basic", "costs", "outcomes"]
         }
-
-    Returns:
-        {
-          "results": [
-            {
-              "id": 194091,
-              "school.name": "University of Rochester",
-              "school.city": "Rochester",
-              "latest.cost.tuition.in_state": 61500,
-              "latest.earnings.10_yrs_after_entry.median": 72000
-            },
-            ...
-          ],
-          "metadata": {...}
-        }
     """
 
     # -----------------------------------------------------------------------
