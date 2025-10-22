@@ -1,47 +1,53 @@
 # Git
+
 .git
 .gitignore
 .gitattributes
 
 # Python
-__pycache__
-*.pyc
-*.pyo
-*.pyd
+
+**pycache**
+_.pyc
+_.pyo
+_.pyd
 .Python
 env
 pip-log.txt
 pip-delete-this-directory.txt
 .tox
 .coverage
-.coverage.*
+.coverage._
 .cache
 nosetests.xml
 coverage.xml
-*.cover
-*.log
+_.cover
+_.log
 .venv
 venv/
 
 # OS
-.DS_Store
+
+.DS*Store
 .DS_Store?
-._*
+.*\*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
 Thumbs.db
 
 # IDE
+
 .vscode
 .idea
-*.swp
-*.swo
-*~
+_.swp
+_.swo
+\*~
 
 # Documentation
+
 README.md
 LICENSE
 
 # App Runner specific
+
 apprunner.yaml
