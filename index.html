@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>College Scorecard Assistant</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 20px;
+            }
+
+            .chat-container {
+                background: white;
+                border-radius: 12px;
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+                width: 100%;
+                max-width: 800px;
+                height: 600px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .chat-header {
+                background: #2c3e50;
+                color: white;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .chat-header h1 {
+                font-size: 1.5em;
+                margin-bottom: 5px;
+            }
+
+            .chat-header p {
+                opacity: 0.8;
+                font-size: 0.9em;
+            }
+
+            .chat-messages {
+                flex: 1;
+                padding: 20px;
+                overflow-y: auto;
+                background: #f8f9fa;
+            }
+
+            .message {
+                margin-bottom: 15px;
+                display: flex;
+                align-items: flex-start;
+            }
+
+            .message.user {
+                justify-content: flex-end;
+            }
+
+            .message-content {
+                max-width: 70%;
+                padding: 12px 16px;
+                border-radius: 18px;
+                font-size: 0.9em;
+                line-height: 1.4;
+            }
+
+            .message.user .message-content {
+                background: #007bff;
+                color: white;
+            }
+
+            .message.assistant .message-content {
+                background: white;
+                border: 1px solid #e9ecef;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            }
+
+            .message.system .message-content {
+                background: #fff3cd;
+                border: 1px solid #ffeaa7;
+                color: #856404;
+                font-style: italic;
+            }
+
+            .chat-input-container {
+                padding: 20px;
+                border-top: 1px solid #e9ecef;
+                background: white;
+            }
+
+            .chat-input-form {
+                display: flex;
+                gap: 10px;
+            }
+
+            .chat-input {
+                flex: 1;
+                padding: 12px 16px;
+                border: 1px solid #ddd;
+                border-radius: 25px;
+                font-size: 0.9em;
+                outline: none;
+                transition: border-color 0.2s;
+            }
+
+            .chat-input:focus {
+                border-color: #007bff;
+            }
+
+            .send-button {
+                padding: 12px 24px;
+                background: #007bff;
+                color: white;
+                border: none;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 500;
+                transition: background 0.2s;
+            }
+
+            .send-button:hover:not(:disabled) {
+                background: #0056b3;
+            }
+
+            .send-button:disabled {
+                background: #6c757d;
+                cursor: not-allowed;
+            }
+
+            .typing-indicator {
+                display: none;
+                align-items: center;
+                gap: 8px;
+                color: #6c757d;
+                font-style: italic;
+                margin-top: 10px;
+            }
+
+            .typing-dots {
+                display: flex;
+                gap: 3px;
+            }
+
+            .typing-dots span {
+                width: 6px;
+                height: 6px;
+                background: #6c757d;
+                border-radius: 50%;
+                animation: bounce 1.4s ease-in-out infinite both;
+            }
+
+            .typing-dots span:nth-child(1) {
+                animation-delay: -0.32s;
+            }
+            .typing-dots span:nth-child(2) {
+                animation-delay: -0.16s;
+            }
+
+            @keyframes bounce {
+                0%,
+                80%,
+                100% {
+                    transform: scale(0);
+                }
+                40% {
+                    transform: scale(1);
+                }
+            }
+
+            .example-queries {
+                margin-top: 15px;
+                text-align: center;
+            }
+
+            .example-queries p {
+                margin-bottom: 10px;
+                color: #6c757d;
+                font-size: 0.9em;
+            }
+
+            .example-btn {
+                display: inline-block;
+                margin: 5px;
+                padding: 8px 12px;
+                background: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-radius: 15px;
+                color: #495057;
+                text-decoration: none;
+                font-size: 0.8em;
+                cursor: pointer;
+                transition: background 0.2s;
+            }
+
+            .example-btn:hover {
+                background: #e9ecef;
+            }
+
+            /* Markdown content styling */
+            .message-content h1,
+            .message-content h2,
+            .message-content h3,
+            .message-content h4,
+            .message-content h5,
+            .message-content h6 {
+                margin: 0.5em 0 0.3em 0;
+                font-weight: 600;
+            }
+
+            .message-content h1 {
+                font-size: 1.3em;
+                border-bottom: 2px solid #e9ecef;
+                padding-bottom: 0.2em;
+            }
+
+            .message-content h2 {
+                font-size: 1.2em;
+                border-bottom: 1px solid #e9ecef;
+                padding-bottom: 0.1em;
+            }
+
+            .message-content h3 {
+                font-size: 1.1em;
+            }
+
+            .message-content p {
+                margin: 0.5em 0;
+            }
+
+            .message-content ul,
+            .message-content ol {
+                margin: 0.5em 0;
+                padding-left: 1.5em;
+            }
+
+            .message-content li {
+                margin: 0.2em 0;
+            }
+
+            .message-content strong {
+                font-weight: 600;
+            }
+
+            .message-content em {
+                font-style: italic;
+            }
+
+            .message-content code {
+                background: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 3px;
+                padding: 0.1em 0.3em;
+                font-family: "Monaco", "Consolas", "Courier New", monospace;
+                font-size: 0.85em;
+            }
+
+            .message-content pre {
+                background: #f8f9fa;
+                border: 1px solid #e9ecef;
+                border-radius: 5px;
+                padding: 1em;
+                overflow-x: auto;
+                margin: 0.5em 0;
+            }
+
+            .message-content pre code {
+                background: none;
+                border: none;
+                padding: 0;
+            }
+
+            .message-content blockquote {
+                border-left: 4px solid #007bff;
+                margin: 0.5em 0;
+                padding: 0.2em 0 0.2em 1em;
+                background: #f8f9fa;
+                border-radius: 0 3px 3px 0;
+            }
+
+            .message-content table {
+                border-collapse: collapse;
+                width: 100%;
+                margin: 0.5em 0;
+            }
+
+            .message-content th,
+            .message-content td {
+                border: 1px solid #dee2e6;
+                padding: 0.4em 0.6em;
+                text-align: left;
+            }
+
+            .message-content th {
+                background: #f8f9fa;
+                font-weight: 600;
+            }
+
+            .message-content a {
+                color: #007bff;
+                text-decoration: none;
+            }
+
+            .message-content a:hover {
+                text-decoration: underline;
+            }
+
+            .message-content hr {
+                border: none;
+                border-top: 1px solid #e9ecef;
+                margin: 1em 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="chat-container">
+            <div class="chat-header">
+                <h1>🎓 College Scorecard Assistant</h1>
+                <p>Ask me about colleges, programs, and admissions data</p>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <div class="message assistant">
+                    <div class="message-content" id="welcomeMessage">
+                        Hello! I'm your College Scorecard Assistant. I can help
+                        you search for colleges and programs using the U.S.
+                        Department of Education's College Scorecard data. Ask me
+                        about schools by location, specific programs, admission
+                        rates, costs, or outcomes!
+                    </div>
+                </div>
+
+                <div class="example-queries">
+                    <p>Try these example queries:</p>
+                    <span
+                        class="example-btn"
+                        onclick="sendExample('Find business schools near Rochester, NY')"
+                        >Find business schools near Rochester, NY</span
+                    >
+                    <span
+                        class="example-btn"
+                        onclick="sendExample('Show me computer science programs in California')"
+                        >CS programs in California</span
+                    >
+                    <span
+                        class="example-btn"
+                        onclick="sendExample('Tell me about MIT')"
+                        >Tell me about MIT</span
+                    >
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="typing-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <span id="typingText">Assistant is thinking...</span>
+            </div>
+
+            <div class="chat-input-container">
+                <form class="chat-input-form" id="chatForm">
+                    <input
+                        type="text"
+                        class="chat-input"
+                        id="chatInput"
+                        placeholder="Ask about colleges, programs, costs, or admissions..."
+                        autocomplete="off"
+                    />
+                    <button type="submit" class="send-button" id="sendButton">
+                        Send
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Include marked.js for markdown parsing -->
+        <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+
+        <script>
+            const chatMessages = document.getElementById("chatMessages");
+            const chatForm = document.getElementById("chatForm");
+            const chatInput = document.getElementById("chatInput");
+            const sendButton = document.getElementById("sendButton");
+            const typingIndicator = document.getElementById("typingIndicator");
+            const typingText = document.getElementById("typingText");
+
+            let isProcessing = false;
+
+            // Add user message to chat
+            function addMessage(content, sender = "assistant") {
+                const messageDiv = document.createElement("div");
+                messageDiv.className = `message ${sender}`;
+
+                const contentDiv = document.createElement("div");
+                contentDiv.className = "message-content";
+
+                // Use markdown rendering for assistant messages, plain text for user messages
+                if (sender === "assistant" && content.trim()) {
+                    try {
+                        contentDiv.innerHTML = marked.parse(content);
+                    } catch (error) {
+                        console.warn("Markdown parsing error:", error);
+                        contentDiv.textContent = content;
+                    }
+                } else {
+                    contentDiv.textContent = content;
+                }
+
+                messageDiv.appendChild(contentDiv);
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+
+                return contentDiv;
+            }
+
+            // Show/hide typing indicator
+            function setTyping(show, text = "Assistant is thinking...") {
+                typingIndicator.style.display = show ? "flex" : "none";
+                typingText.textContent = text;
+                if (show) {
+                    chatMessages.scrollTop = chatMessages.scrollHeight;
+                }
+            }
+
+            // Send message with streaming
+            async function sendMessage(message) {
+                if (isProcessing || !message.trim()) return;
+
+                isProcessing = true;
+                sendButton.disabled = true;
+
+                // Add user message
+                addMessage(message, "user");
+
+                // Show typing indicator
+                setTyping(true);
+
+                try {
+                    const response = await fetch("/chat/stream", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({ message: message }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(
+                            `HTTP error! status: ${response.status}`
+                        );
+                    }
+
+                    const reader = response.body.getReader();
+                    const decoder = new TextDecoder();
+
+                    let assistantMessageDiv = null;
+                    let currentText = "";
+
+                    while (true) {
+                        const { done, value } = await reader.read();
+                        if (done) break;
+
+                        const chunk = decoder.decode(value);
+                        const lines = chunk.split("\n");
+
+                        for (const line of lines) {
+                            if (line.startsWith("data: ")) {
+                                try {
+                                    const data = JSON.parse(line.slice(6));
+
+                                    // Log all received events to console
+                                    //console.log("SSE Event received:", data);
+
+                                    if (data.type === "text") {
+                                        if (!assistantMessageDiv) {
+                                            assistantMessageDiv = addMessage(
+                                                "",
+                                                "assistant"
+                                            );
+                                        }
+                                        currentText += data.content;
+
+                                        // Update the content with markdown rendering
+                                        try {
+                                            assistantMessageDiv.innerHTML =
+                                                marked.parse(currentText);
+                                        } catch (error) {
+                                            console.warn(
+                                                "Markdown parsing error during streaming:",
+                                                error
+                                            );
+                                            assistantMessageDiv.textContent =
+                                                currentText;
+                                        }
+                                    } else if (data.type === "tool") {
+                                        setTyping(
+                                            true,
+                                            `Using ${data.name} tool...`
+                                        );
+                                    } else if (data.type === "status") {
+                                        setTyping(true, data.message);
+                                    } else if (data.type === "error") {
+                                        setTyping(false);
+                                        addMessage(
+                                            `Error: ${data.message}`,
+                                            "system"
+                                        );
+                                    } else if (data.type === "done") {
+                                        setTyping(false);
+                                    }
+                                } catch (e) {
+                                    console.warn(
+                                        "Failed to parse SSE data:",
+                                        line
+                                    );
+                                }
+                            }
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error:", error);
+                    setTyping(false);
+                    addMessage(`Connection error: ${error.message}`, "system");
+                }
+
+                isProcessing = false;
+                sendButton.disabled = false;
+                chatInput.focus();
+            }
+
+            // Handle form submission
+            chatForm.addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const message = chatInput.value.trim();
+                if (message) {
+                    chatInput.value = "";
+                    await sendMessage(message);
+                }
+            });
+
+            // Handle example queries
+            function sendExample(message) {
+                if (!isProcessing) {
+                    chatInput.value = message;
+                    sendMessage(message);
+                }
+            }
+
+            // Focus input on load
+            chatInput.focus();
+        </script>
+    </body>
+</html>
