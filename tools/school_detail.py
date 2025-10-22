@@ -1,18 +1,42 @@
 """
-tools/school_detail.py
-----------------------
+Detailed School Information Tool
+===============================
 
-Strands tool: Fetch detailed college information by institution ID
-from the U.S. College Scorecard API.
+Strands AI tool for retrieving comprehensive institutional data for specific
+colleges and universities using the U.S. Department of Education College
+Scorecard API. This tool provides in-depth information beyond basic search results.
 
 Purpose:
-  After you use the schools or programs search tool to get a list of schools,
-  you can call this one to pull richer data — such as admissions rates,
-  tuition, completion rates, and earnings outcomes — for specific IDs.
+After using schools_search or programs_search to identify institutions of interest,
+use this tool to get detailed institutional profiles including admissions,
+financial aid, academic outcomes, and student demographics.
 
-Typical usage:
-  - "Show admissions and cost details for University of Rochester."
-  - "Get outcome stats for these 3 schools."
+Detailed Information Includes:
+- Admissions: Acceptance rates, SAT/ACT scores, application requirements
+- Financial: Tuition, fees, net price, financial aid statistics
+- Academic: Graduation rates, retention rates, student-faculty ratio
+- Demographics: Student body composition, enrollment statistics
+- Outcomes: Employment rates, median earnings, loan default rates
+- Campus: Location details, campus size, housing information
+
+Input Requirements:
+- Institution ID(s): Numeric identifiers from College Scorecard database
+- Multiple schools can be queried simultaneously for comparison
+
+Use Cases:
+- "Show detailed information for Harvard University"
+- "Compare admissions statistics for these 3 schools"
+- "Get financial aid and cost details for University of California schools"
+- "What are the graduation rates and employment outcomes for this college?"
+
+Data Sources:
+- U.S. Department of Education College Scorecard
+- IPEDS institutional data
+- Federal financial aid records
+- Employment and earnings tracking
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 from typing import List, Dict, Any

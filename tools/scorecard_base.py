@@ -1,17 +1,40 @@
 """
-scorecard_base.py
------------------
-Shared utilities for all College Scorecard tools.
+College Scorecard API Base Utilities
+===================================
 
-This file provides:
-  • A single source for the API endpoint URL.
-  • Functions to retrieve your API key from the environment.
-  • A helper to make async HTTP GET calls (with aiohttp).
-  • Centralized error handling and JSON decoding.
+Shared utilities and base functionality for all College Scorecard tools.
+This module provides a centralized interface to the U.S. Department of Education
+College Scorecard API with consistent error handling and configuration.
 
-All your individual tool modules (schools_search, programs_search, etc.)
-import `fetch_json` and `get_key()` from here, so you only have to maintain
-this logic in one place.
+Features:
+- Centralized API endpoint configuration
+- Environment-based API key management
+- Async HTTP client using aiohttp for non-blocking requests
+- Synchronous HTTP client using requests for simple operations
+- Standardized error handling and response parsing
+- Support for demo mode with DEMO_KEY fallback
+
+API Information:
+- Base URL: https://api.data.gov/ed/collegescorecard/v1/schools.json
+- Documentation: https://collegescorecard.ed.gov/data/documentation/
+- Rate Limits: 1,000 requests per hour with API key
+- Demo Key: Limited functionality for testing
+
+Usage:
+    from tools.scorecard_base import fetch_json, get_key
+    
+    # Get API key
+    api_key = get_key()
+    
+    # Make async API request
+    params = {"api_key": api_key, "fields": "school.name,id"}
+    data = await fetch_json(params)
+
+Environment Variables:
+- COLLEGE_SCORECARD_API_KEY: Your API key from api.data.gov
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 import os

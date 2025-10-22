@@ -1,18 +1,54 @@
 """
-tools/meta.py
--------------
+Metadata and Reference Information Tool
+======================================
 
-Strands tool: Provide metadata and helper lookups for the College Scorecard tools.
+Strands AI tool providing metadata, mappings, and reference information
+for the College Scorecard API and educational data systems. This tool
+helps the AI agent understand data structures and provide better assistance.
 
 Purpose:
-  • Expose valid field profiles (basic, admissions, costs, outcomes)
-    so the agent knows what it can safely request.
-  • Optionally provide CIP (Classification of Instructional Programs) autocomplete.
-  • Return enumerations (institution control types, award levels, etc.)
-    that the agent can use for structured reasoning.
+- Expose available data field profiles and query options
+- Provide CIP (Classification of Instructional Programs) code lookups
+- Share enumeration mappings for institution types and award levels
+- Help the agent construct more accurate and comprehensive queries
+- Serve as a reference guide for educational data structures
 
-This is not a data query tool — it's a *meta-information* layer that helps
-the agent ask smarter and safer questions before hitting the actual API.
+Metadata Categories:
+
+1. Field Profiles:
+   - Basic institutional information
+   - Admissions and enrollment data
+   - Cost and financial aid information
+   - Academic outcomes and employment data
+
+2. CIP Code Classifications:
+   - Standard educational program classifications
+   - Hierarchical program groupings
+   - Common program name mappings
+
+3. Institution Classifications:
+   - Public, private non-profit, private for-profit
+   - Control type mappings and descriptions
+   - Institutional size categories
+
+4. Award Level Mappings:
+   - Certificate through doctoral degree levels
+   - Numeric codes to descriptive names
+   - Educational attainment hierarchies
+
+Usage:
+This tool provides reference information that helps the agent:
+- Construct better search queries
+- Understand data field meanings
+- Provide accurate explanations to users
+- Validate input parameters
+
+Integration:
+Automatically available to the Strands agent for internal reference
+and can be called when users ask about data definitions or categories.
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 import json

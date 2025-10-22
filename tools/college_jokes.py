@@ -1,11 +1,42 @@
 """
-tools/college_jokes.py
------------------------
+College Humor and Entertainment Tool
+===================================
 
-Strands tool for returning random college-themed jokes.
+Strands AI tool providing lighthearted college-themed humor to enhance
+the college search experience. This tool offers family-friendly jokes
+and entertainment to help reduce stress and add levity to the college
+exploration process.
 
-This tool provides lighthearted entertainment with college-themed humor,
-perfect for breaking the ice or adding some fun to college search sessions.
+Purpose:
+- Provide comic relief during intensive college search sessions
+- Break the ice in conversations about college planning
+- Add personality and warmth to the AI assistant experience
+- Help students and families maintain a positive attitude
+
+Features:
+- Curated collection of clean, college-themed jokes
+- Random selection for variety in repeated interactions
+- Educational humor that connects to college experiences
+- Family-friendly content appropriate for all audiences
+
+Content Categories:
+- Academic life and studying humor
+- Student lifestyle and campus experiences
+- Educational wordplay and puns
+- General college-related situations
+
+Usage in Conversation:
+- When users seem stressed about college decisions
+- To lighten the mood during complex financial discussions
+- As an ice-breaker for new conversations
+- When explicitly requested by users
+
+Integration:
+This tool is automatically available to the Strands agent and can be
+triggered through natural language requests for humor or entertainment.
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 import random

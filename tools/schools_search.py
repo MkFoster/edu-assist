@@ -1,23 +1,40 @@
 """
-tools/schools_search.py
------------------------
+College and University Search Tool
+=================================
 
-Strands tool for searching colleges and universities using
-the U.S. Department of Education's College Scorecard API.
+Strands AI tool for searching colleges and universities using the official
+U.S. Department of Education College Scorecard API. This tool provides
+comprehensive search functionality with geographic, institutional, and
+academic criteria filtering.
 
-This tool supports three location modes:
-  1. State only           → all schools in that state
-  2. City + State         → schools in a given city/state pair
-  3. Latitude/Longitude   → schools within a radius (default 25mi)
+Search Capabilities:
+- Geographic: Search by state, city/state, or latitude/longitude with radius
+- Institutional: Filter by public/private, size, control type
+- Academic: Sort by admission rates, costs, graduation rates
+- Specialized: Online-only institutions, specific degree levels
 
-Optional filters:
-  - School control (public/private/for-profit)
-  - School size range (min_size / max_size)
-  - Online-only flag
-  - Sorting by cost, admission rate, etc.
+Location Modes:
+1. State Search: Find all schools in a specific state
+2. City Search: Find schools in a specific city and state
+3. Proximity Search: Find schools within radius of coordinates
 
-The goal is to expose a safe, typed API surface to the LLM,
-while giving it flexibility to retrieve realistic college data.
+Filters Available:
+- School control (public, private non-profit, private for-profit)
+- Institution size (minimum and maximum enrollment)
+- Online-only institutions
+- Sorting options (cost, admission rate, size, etc.)
+
+Data Sources:
+- U.S. Department of Education College Scorecard API
+- IPEDS (Integrated Postsecondary Education Data System)
+- Official institutional data reported to federal government
+
+Usage:
+This tool is automatically registered with the Strands agent and can be
+called through natural language queries about finding colleges.
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 from pydantic import BaseModel, Field, conint, confloat, model_validator

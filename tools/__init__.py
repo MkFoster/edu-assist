@@ -1,10 +1,40 @@
 """
-tools/__init__.py
-Auto-discovers and imports every tool module in this package.
+College Search Tools Package
+===========================
 
-Why? Strands tools register themselves via the @tool decorator at import time.
-So importing all modules here ensures everything is registered without manually
-listing them in app.py.
+Auto-discovery and registration system for Strands AI agent tools.
+
+This module automatically discovers and imports all tool modules in the package,
+ensuring that @tool decorated functions are registered with the Strands framework
+without requiring manual imports in the main application.
+
+Architecture:
+- Automatic module discovery using pkgutil.iter_modules()
+- Dynamic imports using importlib.import_module()
+- Exclusion system for utility modules and configuration files
+- Registration happens at import time via @tool decorators
+
+Tools Included:
+- schools_search: Search for colleges and universities by various criteria
+- programs_search: Find academic programs and degrees
+- school_detail: Get detailed information about specific institutions
+- college_jokes: Provide lighthearted college-related humor
+- meta: Metadata mappings and utility functions
+
+Excluded Modules:
+- scorecard_base: Base utility class (not a tool)
+- __init__.py: This initialization module
+- __pycache__: Python cache directory
+
+Usage:
+    # Import this package to auto-register all tools
+    from tools import *
+    
+    # Or import specific modules if needed
+    from tools import schools_search, programs_search
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 from importlib import import_module  # Dynamically import modules by name

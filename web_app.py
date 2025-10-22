@@ -1,15 +1,43 @@
 """
-FastAPI Web Application for College Scorecard Agent
-==================================================
+College Search Assistant - FastAPI Web Application
+================================================
 
-A web interface for the Strands College Scorecard agent that provides:
-- Real-time streaming chat interface
-- Server-Sent Events (SSE) for live responses
-- Static file serving for frontend assets
-- CORS support for development
+A production-ready web interface for the AI-powered college search assistant.
+Built with FastAPI and deployed on AWS App Runner, this application provides:
 
-Usage:
+Features:
+- Real-time streaming chat interface with Server-Sent Events (SSE)
+- Static file serving for frontend assets (HTML/CSS/JS)
+- CORS support for cross-origin requests
+- Secure credential management via AWS Secrets Manager
+- Auto-scaling deployment on AWS App Runner
+
+Architecture:
+- FastAPI backend with async/await support
+- Strands AI agent integration with Amazon Bedrock (Claude 4.5 Sonnet)
+- Custom tools for U.S. Department of Education College Scorecard API
+- Streaming responses for real-time user experience
+
+Deployment:
+- AWS App Runner for serverless container hosting
+- GitHub integration for automatic deployments
+- Environment variables managed via AWS Secrets Manager
+- Horizontal auto-scaling based on traffic
+
+Local Development:
     uvicorn web_app:app --reload --host 0.0.0.0 --port 8000
+
+Production:
+    Deployed automatically via AWS App Runner from GitHub repository
+
+API Endpoints:
+- GET /: Main chat interface (HTML)
+- POST /chat: Submit chat messages
+- GET /stream: Server-Sent Events for streaming responses
+- Static files served from root directory
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 import asyncio
@@ -19,35 +47,39 @@ import os
 from typing import AsyncGenerator
 from pathlib import Path
 
-# Load environment variables from .env file (like JavaScript dotenv)
+# Load environment variables from .env file for local development
+# In production (AWS App Runner), these come from AWS Secrets Manager
 from dotenv import load_dotenv
-load_dotenv()  # This loads .env file variables into os.environ
+load_dotenv()
 
+# FastAPI framework and supporting libraries
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-# Import our Strands agent
+# Import our custom college search agent
 from agent import make_agent
 
-# Configure logging
+# Configure application logging for debugging and monitoring
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Log environment configuration (without exposing secrets)
+# Log environment configuration status (without exposing sensitive data)
 logger.info(f"AWS_REGION: {os.getenv('AWS_REGION', 'not-set')}")
 logger.info(f"COLLEGE_SCORECARD_API_KEY: {'set' if os.getenv('COLLEGE_SCORECARD_API_KEY') else 'using-demo-key'}")
 
-# Initialize FastAPI app
+# Initialize FastAPI application with metadata
 app = FastAPI(
-    title="College Scorecard Assistant",
-    description="AI-powered college search using the U.S. College Scorecard API",
-    version="1.0.0"
+    title="College Search Assistant",
+    description="AI-powered college and academic program search using official U.S. Department of Education data",
+    version="2.0.0",
+    docs_url="/api/docs",  # Swagger UI documentation
+    redoc_url="/api/redoc"  # ReDoc documentation
 )
 
-# Add CORS middleware for frontend development
+# Configure CORS for cross-origin requests (development and production)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # In production, specify your domain

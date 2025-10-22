@@ -1,20 +1,45 @@
 """
-tools/programs_search.py
-------------------------
+Academic Program and Degree Search Tool
+======================================
 
-Strands tool to search for colleges **by degree program** using the U.S.
-College Scorecard API (Field-of-Study data embedded under institutions).
+Advanced Strands AI tool for searching colleges and universities by specific
+academic programs and degrees using the U.S. Department of Education College
+Scorecard API's Field-of-Study data.
 
-Use cases:
-  • "Find schools that offer Computer Science in NY."
-  • "Show colleges with CIP 11.0101 (Computer Science), bachelor's level."
-  • "List programs with 'nursing' in the name within 50 miles (combine with a schools search)."
+Search Capabilities:
+- Program Search: Find schools offering specific academic programs
+- CIP Code Search: Search by Classification of Instructional Programs codes
+- Keyword Search: Find programs by title keywords (e.g., "computer science", "nursing")
+- Award Level Filtering: Filter by degree level (certificate, associate, bachelor's, master's, doctoral)
+- Geographic Filtering: Combine with location constraints
+- Institutional Filtering: Filter by public/private/for-profit status
 
-This tool:
-  - Lets you filter by CIP code prefix or program title keyword.
-  - Lets you constrain to specific award levels (associate/bachelor/etc.).
-  - Optionally filter by institution 'control' (public/private/for-profit) and state.
-  - Returns each **institution** with an array of the **matching program entries**.
+Supported Award Levels:
+1. Certificate programs
+2. Associate degrees
+3. Bachelor's degrees  
+4. Post-baccalaureate certificates
+5. Master's degrees
+6. Doctoral degrees
+
+CIP Code Support:
+- Full CIP codes (e.g., "11.0101" for Computer and Information Sciences)
+- CIP prefixes (e.g., "11" for all Computer and Information Sciences programs)
+- Automatic CIP code lookup for common program names
+
+Data Included:
+- Program titles and CIP classifications
+- Enrollment numbers and graduation rates
+- Employment outcomes and earnings data
+- Debt levels for program graduates
+
+Use Cases:
+- "Find Computer Science programs in California"
+- "Show nursing schools with bachelor's degrees in Texas"
+- "List engineering programs within 100 miles of Chicago"
+
+Author: Mark Foster
+Last Updated: October 2025
 """
 
 from typing import Optional, List, Dict, Any, Literal
